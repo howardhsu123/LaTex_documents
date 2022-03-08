@@ -1,0 +1,686 @@
+\documentclass{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage[]{amssymb} %gives us the character \varnothing
+
+\title{Functional Analysis Lecture Notes}
+\author{JingDian Hsu}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+\clearpage
+%Section and subsection automatically number unless you put the asterisk next to them.
+\section*{Chapter 1 Hilbert Space}
+\qquad In this chapter we review the main properties of the complex $n-$dimensional space $\Bbb{C}^n$ and then we study the Hilbert space which is its most natural infinite dimensional gerneralization. Many applications to classical problems are included (Least squares, Fourier series and others).
+%Basically, you type whatever text you want and use the $ sign to enter "math mode".
+%For fancy calligraphy letters, use \mathcal{}
+%Special characters are their own commands
+
+\subsection*{Definition 1}
+Let $E$ be a vector space over $\Bbb{C}$. An inner product on $E$ is a function $\langle ,\rangle:E\times E \rightarrow \Bbb{C}$ such that \\
+(a) $\langle x+y, z\rangle = \langle x, z\rangle +\langle y, z\rangle$\\
+(b) $\langle\alpha x, y\rangle=\alpha\langle x,y\rangle$\\
+(c) $\overline{\langle x,y\rangle}=\langle y,x\rangle$\\
+(d) $\langle x,y\rangle\leq 0$ and $\langle x,x \rangle >0$ if $x\neq0$ \\
+$(E, \langle, \rangle)$ is called an inner product space.
+
+\subsection*{Definition 2}
+We define norm as 
+\[
+|| x || = \sqrt{\langle x,x \rangle} 
+\]
+and we define distance as
+\[
+d(x,y)=||x-y||
+\]
+
+\subsection*{Example 3}
+(1) $\Bbb{C}^n$ with inner product $\langle x, y \rangle = \sum_{i=1}^{n} x_i \overline{y_i}$.\\
+(2) $l^2 =  \{(x_1, x_2, ...)| x_i\in \Bbb{C}, \sum_{i=1}^{\infty}| x_i |^2 < \infty \}$ with inner product $\langle x,y \rangle = \sum_{i=1}^{\infty} x_i \overline{y_i}$\\
+(3) $L^2[a,b] = \{f| f:[a,b] \rightarrow \Bbb{C} \, Lebesque \, measure \, s.t. \int_{a}^{b} |f(x)|^2 dx< \infty \}$ with inner product $\langle f,g \rangle =\int_{a}^{b} f(x) \overline{g(x)} dx$\\
+(4) $C[a,b] = \{f|f:[a,b]\rightarrow \Bbb{C} \, continuous\} $ with inner product $\langle f,g \rangle = \int_{a}^{b} f(x) \overline{g(x)} dx$\\
+
+\subsection*{Theorem 4}
+(i) Schwarz inequality
+\[
+|\langle x,y\rangle| \leq ||x|| + ||y|| 
+\]
+(ii) Trangular inequality
+\[ 
+||x+y|| \leq ||x|| + ||y||
+\] 
+(ii) Parallelegrum law
+\[
+||x+y||^2+||x-y||^2=2(||x||^2+||y||^2)
+\]
+%
+\begin{proof}
+Trivial.
+\end{proof}
+
+\subsection*{ Definition 4}
+$E$ is  complete if every Cauchy sequence in $E$ converges to a vector in $E$. A complete inner product space is callled a Hilbert space.
+
+\subsection*{ Example 5}
+(1) $\Bbb{C}^n$ is an n-dimensional Hilbert space. Every finite dimensional inner product space is complete.\\
+(2) $l^2$ is an infinite dimensional Hilbert space.
+\begin{proof}
+Let $\{x_n\}$ be a Cauchy sequence in $l^2$, where
+\[
+x_n=(\xi_{1}^{(n)}, \xi_{2}^{(n)}, ...)
+\]
+For $k$ fixed, we have 
+\[
+|\xi_{k}^{(n)}-\xi_{k}^{(m)}| \leq || x_n-x_m|| \rightarrow 0\, as \, n,m \rightarrow \infty
+\]
+So for fixed $k$, $\{\xi_{k}^{(n)}\}_{n=1}^{\infty}$ is a Cauchy sequence in $\Bbb{C}$. Since $\Bbb{C}$ is complete, there exsists $\xi_k\in \Bbb{C}$ such that $\xi_{k}^{n}\rightarrow\xi_{k}$ as $n\rightarrow\infty$.
+Given $j\in \Bbb{N}$, since
+\[
+\sum_{k=1}^{j}|\xi_{k}^{(n)}|^2 \leq\sum_{k=1}^{\infty}|\xi_{k}^{(n)}|^2  = ||x_n||^2 \leq M
+\]
+Take $n \to \infty$, we have
+\[
+\sum_{k=1}^{j} |\xi_{k}|^2 \leq M
+\]
+For any fixed $j$. Hence, 
+\[
+\sum_{k=1}^{\infty}|\xi_k|^2\leq M
+\]
+Therefore, $x \in l^2$. One only has to show that $x_n \to x$ as $n \to \infty$. Given $\epsilon > 0$ , there exsists $N>0$ such that if $n,m>N$ and $j\in \Bbb{N}$, then 
+\[
+\sum{k=1}^{j}|\xi_k^(n)-\xi_k^(m)|^2 \leq ||x_n-x_m|| <\epsilon
+\]
+Letting $m \rightarrow \infty$,
+\[
+\sum_{k=1}^{j}|\xi_k^(n)-\xi_k|\leq\epsilon
+\]
+Letting $j \rightarrow \infty$ we have
+\[
+||x_n-x||\leq\epsilon
+\]
+whenever $n>N$
+
+\end{proof}
+
+(3) $L[a,b]$ is an infinite dimension Hilbert space.\\
+
+\subsection*{Example 6}
+(1) Let $l_D=\{(\xi_1, \xi_2, ...) \in l^2 | \xi_k=0\, for\, all\,but\, at\, most\, finite\, number\, of\, k\}$. Then $l_D$ is not complete.
+\begin{proof}
+Take $x_n= (1/2, 1/2^2, ..., 1/2^n, 0, 0,...)$ a Cauchy sequence which converge to $x=(1/2,1/2^2,...)$ but $x\notin l_D$\\
+\end{proof}
+(2) The inner product space $P$ of all polynomials with
+\[
+\langle f,g \rangle = \int_{0}^{1}f(x)\overline{g(x)}dx
+\]
+is not complete.
+\begin{proof}
+Take $P_n(x)=\sum_{j=0}^{n}\frac{1}{2^j}x^j$, by Lebesque Dominant Convergent Theorem, we have
+\[
+P_n(x)\rightarrow \frac{1}{1-\frac{x}{2}} \in L^2[0,1]
+\]
+So $\{P_n\}$ is Cauchy in $P$ which doesn't converge.
+\end{proof}
+
+\subsection*{Definition 7}
+The distance from a point $x\in E$ to a set $S\subseteq E$ is defined by
+\[
+d(x,S)\equiv \inf_{y\in S} || x-y||
+\]
+
+\subsection*{Theorem 8}
+This is Theorem 4.2 in text book.\\
+Let M be a finite dimension subspace of $E$ and let $\{\psi_1, \psi_2, ...\psi_n\}$ be an orthonormal basis for $M$. For each $x\in E$, the vecor $y=\sum_{j=1}^{n}\langle x,y_j \rangle \psi_j$ is the unique vector in $M$ such that $||x-y||=d(x,M)$.
+\begin{proof}
+We first prove $x-y\bot M$. If $z\in M$, say $z=\sum_{j=1}^{n}\alpha_j\psi_j$ then 
+\[
+\langle x-y,z \rangle = \sum_{j=1}^{n}\overline{\alpha_j}\langle x-y, \psi_j \rangle=\sum_{j=1}^{n}\overline{\alpha_j}(\langle x, \psi_j \rangle-\langle y, \psi_j \rangle) = 0
+\]
+For any $w\in M$, $w\neq y$, we have 
+\[
+||x-w|| = ||x-y||^2+||y-w||^2 \geq ||x-y||^2
+\]
+\end{proof}
+
+\subsection*{Theorem 9}
+This is Theorem 4.3 in text book.\\
+Let $M$ be a subspace of $E$, $x\in E$ and $y\in M$. Then $x-y\bot M$ iff $||x-y||=d(x,M)$.
+\begin{proof}
+$(\Rightarrow)$ by theorem 8.\\
+$(\Leftarrow)$ Supppose $||x-y||=d(x,M)$. Since $M$ is a subspace $y+\alpha z \in M \forall \alpha \in \Bbb{C}, z\in M$.
+\[
+||x-y||^2 \leq||x-(y+\alpha z)||^2=||x-y||^2-2Re(\alpha \langle z, x-y \rangle)+|\alpha|^2 ||z||^2
+\]
+Thus, $2Re(\alpha\langle z, x-y\rangle)\leq |\alpha|^2||z||^2$.\\
+Take $\alpha=\epsilon\overline{\langle z, x-y \rangle}$ where $\epsilon >0$. We have
+\[
+2\epsilon|\langle z, x-y \rangle|^2 \leq \epsilon^2 | \langle z, x-y\rangle | ||z||^2
+\]
+Since $\epsilon$ is arbitrary, we have $\langle z, x-y\rangle = 0$.
+\end{proof}
+\subsection*{Definition 10}
+\[
+g(x_1,x_2,...,x_n)=det(
+\begin{bmatrix}
+\langle x_1, x_1 \rangle & \langle x_2, x_1 \rangle & \dots & \langle x_n, x_1 \rangle \\
+\langle x_1, x_2 \rangle & \langle x_2, x_2 \rangle & \dots & \langle x_n, x_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\langle x_1, x_n \rangle & \langle x_2, x_n \rangle & \dots & \langle x_n, x_n \rangle 
+\end{bmatrix}
+)
+\]
+is called The Gram determinant.
+
+\subsection*{Theorem 11}
+This is Theorem 5.1 in text book.\\
+Let $\{y_1, y_2, ... y_n\}$ be a basis (not necessarily orthogonal) for subspace $M$ of $E$. Then for any $y \in E$ 
+\[
+d(y,M)=(\frac{g(y_1, y_2,... ,y_n, y)}{g(y_1,y_2,...y_n)})^{\frac{1}{2}} \eqno{(1)}
+\]
+and $0<g(y_1, y_2, ... ,y_n)\leq ||y_1||^2||y_2||^2...||y_n||^2$. Moreover, the vector $w\in M$ for which $d(y,M)=||y-w||$ is given by
+\[
+w=\frac{-1}{g(y_1, y_2, ...,y_n)}det(
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle & \langle y, y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle & \langle y, y_2 \rangle\\
+\vdots & \vdots & \ddots & \vdots & \vdots  \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle & \langle y, y_n \rangle\\
+y_1 & y_2 & \dots & y_n & 0 \\
+\end{bmatrix}
+)
+\eqno{(2)}
+\]
+\begin{proof}
+By theorem 8, theorem 9, there exsists vector $w=\sum_{j=1}^{n}\alpha_j y_j \in M$ such that $||y-w||=d(y,M)$ or equivalently $y-w\bot M$. 
+\[
+0=\langle y-w,y_k \rangle=\langle y, y_k \rangle-\sum_{j=1}^{n}\alpha_j\langle y_j,y_k\rangle \quad \forall 1\leq k\leq n.
+\]
+i.e. 
+
+\[
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle 
+\end{bmatrix}
+\,
+\begin{bmatrix}
+\alpha_1\\
+\alpha_2\\
+\vdots \\
+\alpha_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+\langle y, y_1 \rangle\\
+\langle y, y_2 \rangle\\
+\vdots \\
+\langle y, y_n \rangle
+\end{bmatrix}
+\eqno{(3)}
+\]
+Since (3) has  a unique solution , the determinant of the system is not zero. By Cramer's Rule, we have
+\[
+\alpha_j=\frac{D_j}{g(y_1,y_2,...,y_n} 
+\]
+where $D_j$ is the determinant of the matrix obtained by replacing $j$th column of the matrix 
+\[
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle 
+\end{bmatrix}
+\]
+by the column
+\[
+\begin{bmatrix}
+\langle y, y_1 \rangle\\
+\langle y, y_2 \rangle\\
+\vdots \\
+\langle y, y_n \rangle
+\end{bmatrix}
+\]
+Thus $w$ is the satisfies the equation (2).\\
+To prove (1), write $d=d(y.M)$ for short. Since $y-w\bot M$, $ d^2 =||y-w||^2=\langle y-w, y-w \rangle=\langle y-w,y\rangle=\langle y,y \rangle-\sum\alpha_j\langle y_j,y \rangle$.\\
+This together with (3) shows that the system of equation
+\[
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle & \langle -y,y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle & \langle -y,y_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots &\vdots \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle & \langle -y,y_n \rangle\\ 
+\langle y_1, y \rangle & \langle y_2, y \rangle & \dots & \langle y_n, y \rangle & d^2 - \langle y,y \rangle
+\end{bmatrix}
+\,
+\begin{bmatrix}
+x_1\\
+x_2\\
+\vdots \\
+x_n\\
+x_{n+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+0\\
+\vdots \\
+0\\
+0
+\end{bmatrix}
+\]
+has a nontrivial solution $(x_1, x_2, ..., x_{n+1})=(\alpha_1, \alpha_2,...,\alpha_n, 1)$, which implies the matrix has zero determinant. Expand the determinant through last column we have:
+\[
+g(y_1,y_2,...,y_n,y)=d^2(y,M)g(y_1,y_2,...,y_n)\eqno{(4)}
+\]
+
+Now, $g(y_1)=\langle y_1, y_1 \rangle>0$. Applying (4), to $M_k=span\{y_1,y_2,...,y_k\}$ and $y=y_k+1$ we get
+\[
+g(y_1,y_2,...,y_k,y_k+1)=d^2(y_{k+1},M_k)g(y_1,y_2,...,y_k)\leq||y_{k+1}||^2g(y_1,y_2,...,y_k)
+\]
+By Induction Hypothesis, the statement holds.
+
+\end{proof}
+
+\subsection*{Example 12}
+Let $\{y_1,y_2,y_3\}$ be linearly independent in $\Bbb{R}^3$. The volume of the parallelopiped is
+\[
+V=||y_1||d(y_2,span\{y_1\})d(y_3, span\{y_1,y_2\})
+\]
+By theorem 11, 
+\[
+V^2=\langle y_1,y_1 \rangle \frac{g(y_1,y_2)}{g(y_1)} \frac{g(y_1,y_2,y_3)}{g(y_1,y_2)}=g(y_1,y_2,y_3)
+\]
+
+\subsection*{Theorem 13}
+It is called Hadamard's Inequality.\\
+If $A=(a_{ij})$ is a complex $n\times n$ matrix, then 
+\[
+|det(A)|^2\leq\prod_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2
+\]
+\begin{proof}
+If $det(A)=0$ trivial. Suppose $det(A)\neq 0 $. Let $y_i = (a_{i1},a_{i2},...,a_{in})$. Then $\{y_1,y_2,...,y_n\}$ is linearly independent and $\langle y_i, y_j \rangle = \sum_{k=1}^{n} a_{ik}\overline{a_{jk}}$. By theorem 11, we have the inequality holds.
+\end{proof}
+
+\subsection*{Problem 14}
+Let $x_1,x_2,...,x_k\in [a,b]$ be distinct and $y_1,y_2,...,y_k\in\Bbb{C}$ be given. Find a polynomial $P$ with $deg P \leq k-1$ such that
+\[
+P(x_i)=y_i \, \forall 1\leq i\leq k
+\]
+\emph{solution(Lagrange interpolation):}\\
+A solution is given by
+\[
+P(x)=\sum_{j=1}^{k}y_jP_j(x)
+\]
+where 
+\[
+P_j(x)=\prod_{i=1,i\neq j}^{k}\frac{x-x_i}{x_j-x_i}
+\]
+
+\subsection*{Problem 15}
+Does there exsist a polynomial with $deg P<k-1$ such that $P(x_i)=y_i$?\\
+\emph{solution:}\\
+May not exist.
+
+\subsection*{Problem 16}
+Let $n<k-1$ Find polynomial $P$ with $deg P\leq n$ such that 
+\[
+S(P)=\sum_{i=1}^{k}|y_i-P(x_i)|^2
+\]
+has the smallest value among all polynomial of degree less than $n$.\\
+\emph{solution:}\\
+Consider the inner product space
+\[
+E = \{f:\{x_1,x_2,...x_k\}\rightarrow \Bbb{C}\}
+\]
+with 
+\[
+\langle f,g \rangle = \sum_{i=1}^{k}f(x_i)\overline{g(x_i)}
+\]
+$(E\cong \Bbb{C}^k)$\\
+Let  $M = \{$all polynomial P with degree $\leq n \} \subset E$ is a subspace of $E$. Notice that $\{1,x,...,x^n\}$ are linearly independent in $M$.
+By theorem 11, the desire $P$ is given by
+\[
+P(x)=\frac{-1}{det([c_{ij}])}det(
+\begin{bmatrix}
+c_{00} & c_{01} & \dots & c_{0n} & B_{0} \\
+c_{10} & c_{11} & \dots & c_{1n} & B_{1} \\
+\vdots & \vdots & \ddots & \vdots &\vdots \\
+c_{n0} & c_{n1} & \dots & c_{nn} & B_{n} \\
+1 & x & \dots & x^n & 0 \\
+\end{bmatrix}
+)
+\]
+and
+\[
+d^2(P,M)=\frac{1}{det([c_{ij}])}det(
+\begin{bmatrix}
+c_{00} & c_{01} & \dots & c_{0n} & B_{0} \\
+c_{10} & c_{11} & \dots & c_{1n} & B_{1} \\
+\vdots & \vdots & \ddots & \vdots &\vdots \\
+c_{n0} & c_{n1} & \dots & c_{nn} & B_{n} \\
+\overline{B_{0}} & \overline{B_{1}} & \dots & \overline{B_{n}} & B_{n+1} \\
+\end{bmatrix}
+)
+\]
+where 
+\[
+c_{ij}=\langle x^j,x^i \rangle=\sum_{m=1}^{k} x_m^{i+j} ,\, B_i=\sum_{m=1}^{k}y_mx_m^i ,\, B_{n+1}=\sum_{m=1}^{n}y_m^2
+\]
+
+\subsection*{Problem 17}
+Let $n<k-1$. Find a polynomial $P$ with $deg\leq n$ such that
+\[
+S(P)=\sum_{i=1}^{k}|y_i-p(x_i)|^2\delta_i^2
+\]
+where $\delta)i>0$ are weights, has the smallest value among all polynomials of degree less than $n$.
+\emph{solution:}\\
+Consider inner product:
+\[
+\langle f,g \rangle=\sum_{i=1}^{k} f(x_i)\overline{g(x_i)}\delta_i^2
+\]
+than plug in the equation in Problem 16.
+
+\subsection*{Definition 18}
+Let $V$ be a vector space. A set $C$ in $V$ is convex if $\forall x,y\in C$ we have
+\[
+\{tx+(1-t)y|0<t<1\}\subset C
+\]
+
+\subsection*{Example 19}
+The following statement are truth.\\
+(1) Any linear subapace of $V$ is convex.\\
+(2) In a normal linear space, open balls and closed balls are convex.\\
+(3) $\{f\in L^2[a,b]|f>0\, almost\,everywhere \}$ is convex.\\
+
+\subsection*{Theorem 20}
+This is theorem 8.1 in textbook.\\
+Let $H$ be a Hilbert space and $M$ a closed convex subset of $H$. Then for all  $y\in H$ there exist unique $w\in M$ such that $d(y,M)=||y-w||$.
+\begin{proof}
+Let $d=d(y,M)=\inf_{z\in M}{||y-z||}$. Then there exists a sequence $\{z_n\}$ in $M$ such that $||y-z_n||\rightarrow d$\\
+\emph{claim:}$\{z_n\}$ converges.\\
+\emph{pf of claim:}
+\[
+2(||y-z_n||^2+||y-z_m||^2)=||2y-(z_n+z_m)||^2+||z_n-z_m||^2
+\]
+\[
+=4||y-\frac{z_n+z_m}{2}||^2+||z_n-z_m||^2\geq 4d^2+||z_n-z_m||^2
+\]
+Hence
+\[
+||z_n-z_m||^2\leq2(||y-z_n||^2+||y-z_m||^2)-4d^2\rightarrow 0\, as\, n,m \rightarrow \infty
+\]
+Since $H$ is complete and $\{z_n\}$ is Cauchy, $\{z_n\}$ converges. Since $M$ is closed, there exsist $w\in M$ such that $z_n\rightarrow w$.\\
+To prove uniqueness, suppose $w'\in M$ such that $d=d(y,w')$. Then we have 
+\[
+d^2=||y-\frac{w+w'}{2}||^2=||\frac{y-w}{2}+\frac{y-w'}{2}||^2=2(||\frac{y-w}{2}||^2+||\frac{y-w'}{2}||^2)-||\frac{w-w'}{2}||^2
+\]
+\[
+=2(\frac{d^2}{4}+\frac{d^2}{4})-||\frac{w-w'}{2}||^2
+\]
+Hence,
+\[
+||w-w'||^2\leq 0
+\]
+\end{proof}
+
+\subsection*{Definition 21}
+The orthogonal complement of $S$ in $H$ is the set
+\[
+S^{\bot}=\{x\in H|x\bot S\}
+\]
+
+\subsection*{Lemma 22}
+\[
+S^{\bot}=\overline{S}^{\bot}
+\]
+\begin{proof}
+Clearly $\overline{S}^{\bot}\subset S^{\bot}$. To prove the other side, let $x\in S^{\bot}$ and let $y\in\overline{S}$ Then there exist $\{y_n\}\subset S$ such that $y_n\rightarrow y$ and so $\langle x,y_n \rangle\rightarrow\langle x,y \rangle.$ Thus $\langle x,y \rangle=0$.
+\end{proof}
+
+\subsection*{Lemma 23}
+If $M$ is a subspace of $H$ then so is $\overline{M}$.
+
+\subsection*{Theorem 24}
+This is theorem 8.2 in textbook.\\
+Let $M$ be a closed subspace of $H$. Then for all $y\in H$, there exist unique $w\in M$ and there exist unique $v\in M^{\bot}$ such that $y=w+v$ $(H=M\bigoplus M^{\bot})$ 
+\begin{proof}
+By theorem 20, theere exists a unique $w\in M$ such that $d(y,M)=||y-w||$ and hence $y-w\bot M$. So $v=y-w\in M^\bot$ and $y=w+v$. Next suppose $y=w'+v'$, we have $w-w'=v'-v\in M\cap M^\bot $. Therefore $w=w'$ and $v=v'$
+\end{proof}
+
+\subsection*{Corollary 24}
+This is Corollary 8.3 in textbook.\\
+If $M$ is a subspace of $H$. Then $\overline{M}=(M^\bot)^\bot$.
+\begin{proof}
+Since $\overline{M}\subset (\overline{M}^\bot)^\bot = (M^\bot)^\bot$, it suffice to show "$\supset$". Let $y\in (M^\bot)^\bot$. By theorem 24, there exsist $w\in \overline{M}$ such that $y-w \in \overline{M}^\bot=M^\bot$.Therefore $y-w\in M^\bot \cap (M^\bot)^\bot=\{0\}$ which implies $y=w$.
+\end{proof}
+
+\subsection*{Definition 25}
+\emph{Orthonormal Systems.}\\
+From linear algebra, given linearly independent vectors $\{u_1,u_2,...,u_n\}$ in $H$, there exist orthonormal vectors $\{\phi_1, \phi_2,...,\phi_n\}$ in $H$ such that $span\{\phi_1, \phi_2, ...,\phi_n\}=span\{u_1, u_2, ...,u_n\}$. Take $\phi_1=\frac{u_1}{||u_1||}$ and $\phi_k=\frac{u_k-w_k}{||u_k-w_k||}$ where $w_k=\sum_{i=1}^{k-1}\langle u_k, \phi_i \rangle \phi_i$
+
+\subsection*{Theorem 26}
+This is Theorem 9.1 in textbook.\\
+Let $\{u_1,u_2,...\}$ be linearly independent in $H$. Then the system of vectors $\{ \phi_1, \phi_2,...\}$ in $H$ given by 
+\[
+\phi_1=\frac{u_1}{||u_1||}\, \phi_k=\frac{u_k-w_k}{||u_k-w_k||}
+\]
+where
+\[ 
+w_k=\frac{-1}{det([\langle u_i, u_j \rangle]_{1\leq i,j\leq k-1})}det(
+\begin{bmatrix}
+\langle u_1, u_1 \rangle & \langle u_2, u_1 \rangle & \dots & \langle u_n, u_1 \rangle & \langle u_k, u_1 \rangle \\
+\langle u_1, u_2 \rangle & \langle u_2, u_2 \rangle & \dots & \langle u_n, u_2 \rangle & \langle u_k, u_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+\langle u_1, u_n \rangle &\langle u_2, u_n \rangle & \dots & \langle u_n, u_n \rangle & \langle u_k, u_{k-1} \rangle \\
+u_1 & u_2 & \dots & u_{k-1} & 0 \\
+\end{bmatrix}
+)
+\]
+is orthonormal and $span\{\phi_1, \phi_2, ...,\phi_n\}=span\{u_1, u_2, ...,u_n\}$.
+\begin{proof}
+By theorem 11, $||u_k-w_k||=d(u_k,M)$ where $M=span\{u_1, u_2, ...,u_{k-1}\}$. Hence $u_k-w_k\bot M$. Moreover, $\phi_k\in span\{u_1, u_2, ...,u_{k-1}\}$ which impies $\{\phi_1, \phi_2, ...,\phi_{k-1}\}$ is orthonormal in $span\{u_1, u_2, ...,u_{k-1}\}$
+\end{proof}
+
+\subsection*{Example 27}
+Those are example of orthonormal set in correspond Hilbert space.\\
+(1) $e_1=(1,0,0,0...), e_2=(0,1,0,0,...)... $ is orthonormal in $l^2$.\\
+(2) $\{\frac{1}{\sqrt{2\pi}}e^{int}\}_{n=-\infty}^{\infty}$ is orthonormal in $L^2[-\pi, \pi]$.\\
+(3) $\{\frac{1}{\sqrt{2\pi}},\frac{cos x}{\sqrt{\pi}},\frac{sin x}{\sqrt{\pi}},...,\frac{cos nx}{\sqrt{\pi}},\frac{sin nx}{\sqrt{\pi}},...\}$ is orthonormal in $L^2[-\pi, \pi]$.\\
+
+\subsection*{Definition 28}
+\emph{Legendre polynomials}
+Let $H=L^2[-1,1]$ and let $u_n(x)=x^n$. Then $\{u_0, u_1, u_2,...\}$ are linearly independent in $H$. We try to find an orthonormal system $\{ \phi_0, \phi_1, ...\}$ such that 
+\[
+span\{\phi_1, \phi_2, ...,\phi_n\}=span\{u_1, u_2, ...,u_n\}
+\]
+By theorem 26, 
+\[
+\phi_0=\frac{u_0}{||u_0||}=\frac{1}{\sqrt{2}}
+\]
+\[
+w_1=\frac{-1}{\langle u_0,u_0 \rangle}
+\begin{vmatrix}
+\langle u_0, u_0 \rangle & \langle u_1, u_0 \rangle \\
+u_0 & 0\\
+\end{vmatrix}
+=\frac{\langle u_1, u_0 \rangle}{\langle u_0, u_0 \rangle} u_0=0
+\]
+\[
+\phi_1=\frac{u_1-w_1}{||u_1-w_1||}=\frac{u_1}{||u_1||}=\sqrt{\frac{3}{2}}x
+\]
+\[
+w_2=\frac{1}{3}
+\]
+\[
+\phi_2=\sqrt{\frac{5}{2}}\frac{1}{2}(3x^2-1)
+\]
+\emph{Claim:}
+\[
+\phi_n(x)=\sqrt{\frac{2n+1}{2}}\frac{1}{2^n n!}\frac{d^n}{dx^n}[(x^2-1)^n]
+\]
+\emph{pf of claim:}\\
+By the Gram-Schmidt procedure, each $\phi_k$ is a polynomial of degree $k$ and its leading coefficient is positive. Since $span\{\phi_1, \phi_2, ...,\phi_n\}=span\{u_1, u_2, ...,u_n\}$
+\[
+\psi_k(x)=\sum_{j=0}^{k}a_{kj}x^j\, a_{kk}>0\, and\, x^k=\sum_{j=0}^{k}b_{kj}b_{kj}\psi_{j}(x)\, b_{kk}>0
+\]
+Note that if $P_n$ is a polinomial of degree $n$ and $\langle P_n x^j \rangle=0$ for all $j=0,1,2,...,n-1$ then $P_n=c_n\phi_n$ for some $c_n\in \Bbb{C}$.
+\begin{proof}
+\[
+P_n \in span\{1,x,x^2,...,x^n\}=span\{\phi_0,\phi_1,\phi_2,...,x^n\}
+\]
+\[
+\Rightarrow P_n=\sum_{i=0}^{n}c_i\psi_i
+\]
+\[
+\Rightarrow \langle P_n, \phi_k \rangle = c_k 
+\]
+But $\langle P_n,\phi_k \rangle=\sum_{j=0}^{k}\overline{a_{kj}}\langle P_n, x^j \rangle=0$. Hence $P_n=c_n\phi_n$\\
+Now let $P_n(x)=\frac{d^n}{dx^n}[(x^2-1)^n]$\\
+Since $Q_n^{(k)}=P_n(x)=\frac{d^k}{dx^k}[(x^2-1)^n]$ vanishes at $\{ \pm 1\}$ when $0\leq k \leq n-1$\\
+Repeat integration by part gives 
+\[
+\langle P_n, x^k \rangle=0
+\]
+This implies that $P_n=c_n\phi_n$ for some $c_n\in \Bbb{C}$\\
+Same technique for 
+\[
+\langle P_n,P_n \rangle=\frac{(n!)^2 2^{2n+1}}{2n+1}
+\]
+\end{proof}
+
+\subsection* {Example 29}
+Find 
+\[ 
+\min_{a,b,c\in \Bbb{C}}\int_{-1}^{1}|x^3-ax^2-bx-c|^2 dx
+\]
+
+\subsection* {Example 30}
+Find
+\[
+\min_{a,b,c\in\Bbb{C}} \int_{0}^{\infty}|x^3-ax^2-bx-c|^2 e^{-x}dx
+\]
+
+\subsection* {Lemma 31}
+The inner product is continuous on $H\times H$ i.e. $x_n \rightarrow x$ and $y_n \rightarrow y$ in $H$ then $\langle x_n, y_n \rangle \rightarrow \langle x, y \rangle$
+
+\begin{proof}
+\end{proof}
+
+\subsection* {Theorem 32}
+This is theorem 11.2 in textbook.\\
+If $\{ \psi_1, \psi_2,...\}$ is an orthonormal system in $H$ then for all $x \in H $\\
+(a) $\sum_{j=1}^{\infty} |\langle x,\psi_j \rangle|^2 \leq ||x||^2$ (Bessel's inequality)\\
+(b) $\sum_{j=1}^{\infty} \langle x, \psi_j \rangle $converges.\\
+(c) $\sum_{j=1}^{\infty} \alpha_j \psi_j $ converges iff $\{\alpha_j\} \in l^2$\\
+(d) If $y = \sum_{j=1}^{\infty} \alpha_j \psi_j $ then $\alpha_j = \langle y,\psi \rangle$\\
+
+\begin{proof}
+\end{proof}
+
+\subsection * {Definition 33}
+An orthonormal system $\{\psi_1, \psi_2... \}$ is callled an orthonormal basis （or a complete orthonormal system) for  $H$ if for all $v\in H$. $v = \sum_{j=1}^{\infty} \alpha_j \psi_j$ for some $\alpha_j \in \Bbb{C}$. In this case $\alpha_j =\langle v, \psi_j \rangle$ by (d).
+
+\subsection * {Theorem 34}
+Let $\{\psi_1, \psi_2,... \}$ be an orthonormal system in $H$ Then TFAE.\\
+(a) $\{\psi_1, \psi_2,...\}$ is an orthonormal basis for $H$.\\
+(b) $\langle x, \psi_j \rangle = 0 $ for all $j=1,2,...$ then $x=0$\\
+(c) $span\{ \psi_1, \psi_2,...\} $ is dense in $H$.\\
+(d) $||x||^2 = \sum_{j=1}^{\infty} |\langle x, \psi_j\rangle |^2 $ for all $x\in H$ (Parseval's equality)\\
+(e) $\langle x,y \rangle = \sum_{j=1}^{\infty}\langle x, \psi_j \rangle \overline{\langle y, \psi_j \rangle}$ for all $ x,y \in H$\\
+
+\begin{proof}
+\end{proof}
+
+\subsection*{Recall 35}
+Weierstrass Approximation theorem.\\
+If $f:[a,b]\rightarrow \Bbb{C}$ is continuous. Then for all $\epsilon >0$ there exists a polynomial $P$ such that $|f(x)-P(x)|<\epsilon \forall x\in [a,b]$.
+
+\subsection*{Recall 36}
+If $f:[-\pi, \pi ]\rightarrow \Bbb{C} $ is a continous function and $f(-\pi)=f(\pi)$. Then $\forall \epsilon >0$ there exists a trigonalmetric ploynomial $T_n(x)=\sum_{j=0}^{n}(a_j cos jx+b_jsin jx)$ such that $|f(x) -T_n(x)|<\epsilon \forall x\in [-\pi,\pi]$.
+
+\subsection*{Theorem 37}
+The orthonormal system $S=\{\frac{1}{\sqrt{2\pi}},\frac{cos x}{\sqrt{\pi}},\frac{sin x}{\sqrt{\pi}},...,\frac{cos nx}{\sqrt{\pi}},\frac{sin nx}{\sqrt{\pi}},...\}$ is an orthonormal basis for $L^2[-\pi,\pi]$.
+
+\subsection*{Remark 38}
+$\forall f\in L^2[-\pi,\pi]$ the series 
+\[
+\langle f,\frac{1}{\sqrt{2\pi}}+\sum_{j=1}^{\infty} (\langle f, \frac{cos jx}{\sqrt{\pi}} \rangle cos jx+\langle f, \frac{sin jx}{\sqrt{\pi}} \rangle sin jx
+\]
+\[
+=\frac{a_0}{2}++\sum_{j=1}^{\infty} (a_j cos jx+\langle f, b_j \rangle sin jx)
+\]
+converges in $L^2[a,b]$, where
+\[
+a_j=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x) cos jx dx
+\]
+\[
+b_j=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x) sin jx dx
+\]
+and the series is called Fourier Series of f. Also, by Parseval identity,
+\[
+\int_{-\pi}^{\pi}|f(x)|^2dx = |\langle f,\frac{1}{\sqrt{\pi}}\rangle|^2+\sum_{j=1}^{\infty}|\langle f,\frac{cos jx}{\sqrt{\pi}}\rangle|^2+|\langle f,\frac{sin jx}{\sqrt{\pi}}\rangle|^2=\pi \{|\frac{a_0}{2}|^2+\sum_{j=1}^{\infty}|a_j|^2+|b_j|^2\}
+\]
+
+\subsection*{Theorem 39}
+$\{\frac{1}{\sqrt{2\pi}}e^{int}\}_{n=-\infty}^{\infty}$ is orthonormal basis for $L^2[-\pi, \pi]$.
+
+\begin{proof}
+\end{proof}
+
+\subsection *{Remark 40}
+$\forall f\in L[-\pi,\pi]$ the Fourier series
+\[
+\sum_{j=1}^{\infty} \langle f, \frac{e^{ijx}}{\sqrt{\pi}} \rangle e^{ijx}=\sum_{j=-\infty}^{\infty} c_j e^{ijx}
+\]
+converges in $L^2[\pi, \pi]$ to $f(x)$ where 
+\[
+c_j=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x) e^{-ijx} dx
+\]
+and by Parseval identity
+\[
+\int_{-\pi}^{\pi}|f(x)|^2dx =\sum_{j=-\infty}^{\infty}|\langle f,\frac{e^{ijx}}{\sqrt{2\pi}}\rangle|^2=2\pi \sum_{j=-\infty}^{\infty}|c_j|^2
+\]
+
+
+\subsection *{Theorem 41}
+We have shown that the normalized Legendre polynomials
+\[
+\{\phi_n(x)=\sqrt{\frac{2n+1}{2}}\frac{1}{2^n n!}\frac{d^n}{dx^n}[(x^2-1)^n]\}_{n=0}^{\infty}
+\]
+is an orthonormal basis in $L[-1,1]$ and 
+\[
+span\{1,x,x^2,...,x^k\}=span\{\psi_0,\psi_1,\psi_2,...,\psi_k\} \forall k\geq 0
+\]
+\begin{proof}
+\end{proof}
+
+\subsection *{Theorem 42}
+This is theorem 14.1 in textbook.
+If $\{\psi_0,\psi_1,\psi_2,...\}$ is an orthonormal basis for $L[a,b]$ then $\{ \psi_{i,j}(s,t)=\psi_i(s)\psi_j(t)\}_{i,j=1}^{\infty}$ forms an orthonomal basis fo $L^2([a,b]\times[a,b])$
+\begin{proof}
+\end{proof}
+
+\subsection *{Remark 43}
+The above argument shows that if 
+
+\subsection *{Example 44}
+Since $\{\frac{1}{\sqrt{2\pi}}e^{int}\}_{n=-\infty}^{\infty}$ is an orthonormal basis for $L^2[-\pi, \pi]$, we have $\{\frac{1}{\sqrt{2\pi}}e^{i(ns+mt)}\}_{n,m=-\infty}^{\infty}$ forms an orthonomal basis for $L^2([-\pi, \pi]\times[-\pi, \pi])$
+
+\subsection *{Lemma 45}
+This is Lemma 15.1 in textbook.\\
+If $M$ and $N$ are subspaces of an inner product space and $dim M < dim N$ then $M^\bot \cap N \neq \{0\}$.
+\begin{proof}
+\end{proof}
+ 
+
+\end{document}

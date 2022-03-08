@@ -1,0 +1,393 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{dsfont}
+\usepackage{graphicx}
+
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+%------------------------------------------------------------
+%This block of code defines the information to appear in the
+%Title page
+\title[NSQC and Lovasz number] %optional
+{No-signalling-assisted zero-error capacity of quantum channels and an information theoretic interpretation of the Lov\'{a}sz number}
+
+\subtitle{}
+
+\author[R. Duan and A. Winter] % (optional)
+{Runyao Duan, and Andreas Winter}
+
+\institute[] % (optional)
+{
+}
+
+\date[IEEE 2015] % (optional)
+{IEEE Transactions on Information Theory, January 2015}
+
+%\logo{\includegraphics[height=1cm]{overleaf-logo}}
+
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+
+  \end{frame}
+}
+%------------------------------------------------------------
+
+
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+
+
+%---------------------------------------------------------
+%This block of code is for the table of contents after
+%the title page
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+
+\end{frame}
+%---------------------------------------------------------
+\section{Structure of quantum no-signalling correlation}
+
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Mathematical Definition of quantum no-signalling correlations}
+\begin{block}{Definition 1 Quantum no-signalling correlations}
+Quantum no-signalling correlations are linear maps
+\[
+\Pi : \mathcal{L}(A_i)\otimes \mathcal{L}(B_i)\rightarrow \mathcal{L}(A_o)\otimes \mathcal{L}(B_o)
+\]
+such that the following constrains holds:
+\[
+\Omega \geq 0 \,(CP)
+\]
+\[
+Tr_{A_o B_o}\Omega = \mathds{1}_{A_i'B_i'} \, (TP)
+\]
+\[
+Tr_{A_o A_i'}\Omega X_{A_i'}^T=0\, \forall TrX=0 \, (A \nrightarrow B)
+\]
+\[
+Tr_{B_o B_i'}\Omega Y_{B_i'}^T=0\, \forall TrY=0 \, (B \nrightarrow A)
+\]
+where $\Omega_{A_i'A_oB_i'B_o} = (id_{A_i'}\otimes id_{B_i'}\otimes \Pi)(\Phi_{A_iA_i'}\otimes \Phi_{B_iB_i'})$
+
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Structure theorems for quantum no-signalling correlations}
+
+\begin{itemize}
+\item The condition $A \nrightarrow B$ is called $A$ to $B$ no signalling.
+\item The condition $B \nrightarrow A$ is called $B$ to $A$ no signalling.
+\item Consider two kind of bipartition: $A_i A_o:B_i B_o$ and $A_i B_o:B_i A_o$.
+\end{itemize}
+\begin{block}{Proposition 1}
+Let $\Pi : \mathcal{L}(A_i)\otimes \mathcal{L}(B_i)\rightarrow \mathcal{L}(A_o)\otimes \mathcal{L}(B_o)$ be a bipartite $CPTP$ map with a decomposition $\Pi= \sum_k{\lambda_k \mathcal{A}_k \otimes \mathcal{B}_k}$ according to bipartition $A_i A_o:B_i B_o$, where $\mathcal{A}_k:\mathcal{L}(A_i)\rightarrow \mathcal{L}(A_o)$, $\mathcal{B}_k:\mathcal{L}(B_i)\rightarrow \mathcal{L}(B_o)$, and $\lambda_k$ are complex numbers. Then we have the following:\\
+(1)$\Pi$ is $B$ to $A$ no-signalling iff $\mathcal{B}_k$ can be chosen as $CPTP$ for any $k$. In this case $\sum_k \lambda_k \mathcal{A}_k$ will be also $CPTP$.\\
+(2)$\Pi$ is $A$ to $B$ no-signalling iff $\mathcal{A}_k$ can be chosen as $CPTP$ for any $k$. In this case $\sum_k \lambda_k \mathcal{B}_k$ will be also $CPTP$.\\
+(3)$\Pi$ is no-signalling between $A$ and $B$ iff both $\mathcal{A}_k$ and $\mathcal{B}_k$ can be chosen as $CPTP$ maps, $\sum_k \lambda_k = 1$ and $\lambda_k$ are real for all $k$. \\
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Structure theorems for quantum no-signalling correlations}
+\begin{block}{Proposition 2}
+Let $\Pi : \mathcal{L}(A_i)\otimes \mathcal{L}(B_i)\rightarrow \mathcal{L}(A_o)\otimes \mathcal{L}(B_o)$ be a bipartite $CPTP$ map with a decomposition $\Pi= \sum_k{\mu_k \mathcal{E}_k \otimes \mathcal{F}_k}$ according to bipartition $A_i B_o:B_i A_o$, where $\mathcal{E}_k:\mathcal{L}(A_i)\rightarrow \mathcal{L}(B_o)$, $\mathcal{F}_k:\mathcal{L}(B_i)\rightarrow \mathcal{L}(A_o)$, and $\mu_k$ are complex numbers. Then we have the following:\\
+(1)If $\sum_k \mu_k \mathcal{E}_k$ is a constant map and $\mathcal{F}_k$ is $TP$ for any $k$, then $\Pi$ is $A$ to $B$ no-signalling.\\
+(2)If $\sum_k \mu_k \mathcal{F}_k$ is a constant map and $\mathcal{E}_k$ is TP for any $k$, then $\Pi$ is $B$ to $A$ no-signalling.\\
+(3)If all $\mathcal{E}_k$ and $\mathcal{F}_k$ are $TP$ and both $\sum_k \mu_k \mathcal{E}_k$ and $\sum_k \mu_k \mathcal{F}_k$ are constant maps, then $\Pi$ is no-signalling between $A$ and $B$.\\
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Structure theorems for quantum no-signalling correlations}
+\begin{block}{Proposition 3}
+Let $\mathcal{E}_0$ and $\mathcal{E}_1$ be two $CPTP$ maps from $\mathcal{L}(A_i)$ to $\mathcal{L}(B_o)$, and let $\mathcal{F}_0$, $\mathcal{F}_1$ be two $CP$ maps from $\mathcal{L}(B_i)$ to $\mathcal{L}(A_o)$. Furthermore, assume there is unique $0\leq p \leq 1$ such that $p\mathcal{E}_0+(1-p)\mathcal{E}_1$ is a constant channel. Then $\Pi = p\mathcal{E}_0\otimes\mathcal{F}_0+(1-p)\mathcal{E}_1\otimes\mathcal{F}_1$ is a no-signalling correlation if and only if both $\mathcal{F}_0$ and $\mathcal{F}_1$ are $CPTP$ maps, and $p\mathcal{F}_0+(1-p)\mathcal{F}_1$ is a constant map.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Composing no-signalling correlations with quantum channels}
+\begin{itemize}
+\item Suppose now we are given a no-signalling map $\Pi:\mathcal{L}(A_i\otimes B_i)\rightarrow \mathcal{L}(A_o\otimes B_o)$ and a $CPTP$ map $\mathcal{N}:\mathcal{L}(A)\rightarrow \mathcal{L}(B)$. When $A=A_o$ and $B,B_i$ and $B_i'$ are all isomorphic. We can have the following:
+\[
+\mathcal{M}(X_{A_i})=Tr_{BB_i'}\{[((id_{B_oB_i'}\otimes\mathcal{N})\circ (id_{B_i}'\otimes \Pi))(X_{A_i}\otimes\Phi_{B_iB_i'})](\mathds{1}_{B_o}\otimes\Phi_{B B_i'})\}
+\]
+\includegraphics[width = 3in]{fig}
+
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+
+\section{Semidefinite programmes of zero-error communication}
+
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Zero-error assisted communication capacity}
+\begin{itemize}
+\item For any integer $M$, we denote by $M_a$ and $M_b$ classical registers with size $M$.
+\item We use $\mathcal{I}_M:M_a\rightarrow M_b$ to denote the noiseless classical channel that can send $M$ messages from $A$ to $B$, i.e:
+\[
+\mathcal{I}_M(|m\rangle\langle m'|_{M_a})=\delta_{mm'}|m\rangle\langle m|_{M_b}
+\]
+or equivalently,
+\[
+\mathcal{I}_M(\rho)=\sum_{m=1}^{M}(Tr \rho|m\rangle\langle m|_{M_a})|m\rangle\langle m|_{M_b}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Zero-erro assisted communication capacity}
+\begin{block}{Theorem 1}
+The one-shot zero-error classical capability (quantified as the largest number of messages) of $\mathcal{N}$ assisted by quantum no-signalling correlations depends only on the non-commutative graph $K$, and is given by the integer part of the following SDP:
+\[
+\Upsilon(\mathcal{N})=\Upsilon (K)=\max {Tr(S_A)}\, s.t.
+\]
+\[
+0\leq E_{AB}\leq S_A\otimes\mathds{1}_B
+\]
+\[
+Tr_A E_{AB}=\mathds{1}_B
+\]
+\[
+TrP_{AB}(S_A\otimes\mathds{1}_B-E_{AB})=0
+\]
+where $P_{AB}$ denotes the projection onto the subspace $(\mathds{1}\otimes K)|\Phi\rangle$. 
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proof of Theorem1}
+\begin{itemize}
+\item Claim1: 
+\[
+\Omega_{M_aM_bAB} = \frac{1}{M} D_{M_aM_b}\otimes E_{AB}+\frac{1}{M}(\mathds{1}-D)_{M_aM_b}\otimes F_{AB}
+\]
+where $D=\sigma_{m}|mm\rangle\langle mm|$ is the Choi matrix of the noiseless classical channel $\mathcal{I}_M$, and such $\Omega$ satisfies no-signalling condition:
+\[
+Tr_AE_{AB}=Tr_AF_{AB}=\mathds{1}_B (A\nrightarrow B)
+\]
+\[
+\frac{1}{M} E_{AB}+(1-\frac{1}{M})F_{AB}=\sigma_A\otimes\mathds{1}_B (B\nrightarrow A)
+\]
+with some state $\sigma$.
+\item If Claim 1 holds, 
+\[
+\Omega_{M_aM_bAB} = \frac{1}{M} D_{M_a M_b}\otimes E_{AB} + (1-\frac{1}{M})\tilde{D}_{M_aM_b}\otimes F_{AB}
+\]
+where $\tilde{D}_{M_aM_b}=\frac{1}{M-1}(\mathds{1}-D)_{M_a M_b}$ is the Choi matrix of the classical channel $\tilde{\mathcal{I}}_M$ that sends each $m$ into a uniform distribution of $m'\neq m$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proof of Theorem1}
+\begin{itemize}
+\item In other words, the no-signalling correlation $\Pi$ should have the following form
+\[
+\Pi = \frac{1}{M}\mathcal{I}_M\otimes \mathcal{E}+ (1-\frac{1}{M})\tilde{\mathcal{I}}_M\otimes \mathcal{F}
+\]
+and $\mathcal{E}$ and $\mathcal{F}$ are $CP$ maps from $B$ to $A$ corresponding to Choi matices $E_{AB}$ and $F_{AB}$ respectively
+
+\item By the propsition above, we obtain the no-signalling constraints.
+\item Composing $\mathcal{N}$ with $\Pi$, we have
+\[
+\mathcal{M}=\frac{1}{M}\mathcal{I}_M Tr(\mathcal{N}\circ \mathcal{E})+(1-\frac{1}{M})\tilde{\mathcal{I}}_M Tr(\mathcal{N}\circ \mathcal{F})
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Proof of Theorem1}
+\begin{itemize}
+\item The zero-error constraint requires $\mathcal{M}=\mathcal{I}_M$, which is equivalent to $Tr(\mathcal{N}\circ \mathcal{F}=0)$ or 
+\[
+TrF_{AB}J_{AB}=0
+\]
+where $(J_{AB}\otimes id_B)(\Phi_{B'B})$ is the Choi matrix of $\mathcal{N}$.
+\item Since $E_{AB}$ and $F_{AB}$ depend on each othe, we can eliminate one of them. The existence of $F_{AB}$ will be equivalent to
+\[
+Tr_AE_{AB}=\mathds{1}_B,0\leq E_{AB}\leq M\sigma_A\otimes\mathds{1}_B, TrP_{AB}(M\sigma_A\otimes\mathds{1}_B-E_{AB})=0
+\]
+\item By absorbing $M$ into $\sigma_A$ and introducing $S_A=M\sigma_A$, we get M as the integer part of 
+\[
+\max TrS_A \, s.t.
+\]
+\[
+0\leq E_{AB}\leq S_A\otimes\mathds{1}_B, Tr_A E_{AB}=\mathds{1}_B\, TrP_{AB}(S_A\otimes\mathds{1}_B-E_{AB})=0
+\]
+which ends the proof.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item D. Kretschmann, R. F. Werner, “Tema con variazioni: quantum channel capacity”, New J. Phys. 6:26
+(2004).
+\item C. H. Bennett, P. W. Shor, J. A. Smolin, A. V. Thapliyal, “Entanglement-assisted capacity of a quantum
+channel and the reverse Shannon theorem”, IEEE Trans. Inf. Theory 48(10):2637-2655 (2002).
+\item C. H. Bennett, I. Devetak, A. W. Harrow, P. W. Shor, A. Winter, “The Quantum Reverse Shannon Theorem and Resource Tradeoffs for Simulating Quantum Channels”, IEEE Trans. Inf. Theory 60(3):2926-
+2959 (2014); arXiv[quant-ph]:0912.5537.
+\item  M. Berta, M. Christandl, R. Renner, “The Quantum Reverse Shannon Theorem Based on One-Shot
+Information Theory”, Commun. Math. Phys. 306(3):579-615 (2011).
+\item C. E. Shannon, “The zero-error capacity of a noisy channel”, IRE Trans. Inf. Theory 2(3):8-19 (1956).
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item R. Duan, Y. Shi, “Entanglement between two uses of a noisy multipartite quantum channel enables
+perfect transmission of classical information”, Phys. Rev. Lett. 101:020501 (2008).
+\item  R. Duan, “Super-activation of zero-error capacity of noisy quantum channels”, arXiv[quantph]:0906.2526 (2009).
+\item T. S. Cubitt, J. Chen, A. W. Harrow, “Superactivation of the asymptotic zero-error classical capacity of
+a quantum channel”, IEEE Trans. Inf. Theory 57(12):8114-8126 (2011). arXiv[quant-ph]:0906.2547.
+\item T. S. Cubitt, G. Smith, “An extreme form of super-activation for quantum zero-error capacities”, IEEE
+Trans. Inf. Theory 58(3):1953-1961 (2012).
+\item T. S. Cubitt, D. Leung, W. Matthews, A. Winter, “Improving zero-error classical communication with
+entanglement”, Phys. Rev. Lett. 104:230503 (2010).
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item R. Duan, S. Severini, A. Winter, “Zero-error communication via quantum channels, non-commutative
+graphs and a quantum Lov \'{a}sz number”, IEEE Trans. Inf. Theory 59(2):1164-1174 (2013). arXiv[quantph]:1002.2514.
+\item T. S. Cubitt, D. Leung, W. Matthews, A. Winter, “Zero-error channel capacity and simulation assisted
+by non-local correlations”, IEEE Trans. Inf. Theory 57(8):5509-5523 (2011).
+\item   C. Berge, Graphs and Hypergraphs, North-Holland (Elsevier), Amsterdam, 1973.
+\item E. R. Scheinerman, D. H. Ullman, Fractional Graph Theory: A Rational Approach to the Theory of Graphs,
+Vol. 46 of Wiley Series in Discrete Mathematics and Optimization, John Wiley \& Sons, 1997.
+\item D. Leung, L. Man\u{c}inska, W. Matthews, M. Ozols, A. Roy, “Entanglement can increase asymptotic
+rates of zero-error classical communication over classical channels”, Commun. Math. Phys. 311:97-111
+(2012).
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item R. Duan, S. Severini, A. Winter, “On zero-error communication via quantum channels in the presence
+of noiseless feedback”, arXiv[quant-ph]:1502.02987 (2015).
+\item D. Beckman, D. Gottesman, M. A. Nielsen, J. Preskill, “Causal and localizable quantum operations”,
+Phys. Rev. A 64:052309 (2001).
+\item T. Eggeling, D. Schlingemann, R. F. Werner, “Semicausal operations are semilocalizable”, Europhys.Lett. 57(6):782-788 (2002).
+
+\item   M. Piani, M. Horodecki, P. Horodecki, R. Horodecki, “Properties of quantum nonsignaling boxes”,
+Phys. Rev. A 74:012305 (2006).
+\item O. Oreshkov, F. Costa, C. Brukner, “Quantum correlations with no causal order”, Nature Comm.
+3(10):1092 (2012).
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item G. Chiribella, “Perfect discrimination of non-signalling channels via quantum superposition of causal
+structures”, Phys. Rev. A 86:040301 (R) (2012).
+\item L. Vandenberghe, S. Boyd, “Semidefinite Programming”, SIAM Rev. 38(1):49-95 (1996).
+\item D. Leung, W. Matthews, “On the power of PPT-preserving and non-signalling codes”, arXiv[quantph]:1406.7142 (2014).
+\item R. K\"{o}nig, R. Renner, C. Schaffner,“The operational meaning of min- and max-entropy”, IEEE Trans.
+Inf. Theory 55(9):4337-4347 (2009).
+
+\item   M. Tomamichel, A Framework for Non-Asymptotic Quantum Information Theory, PhD thesis, ETH Z ¨urich,
+2012, arXiv[quant-ph]:1203.2142 (2012).
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item A. Harrow, personal communication (December 2011).
+\item L. Lov \'{a}sz, “On the Shannon capacity of a graph”, IEEE Trans. Inf. Theory 25(1):1-7 (1979).
+\item G. Chiribella, G. M. D’Ariano, P. Perinotti, “Quantum Circuit Architecture”, Phys. Rev. Lett. 101:060401
+(2008).
+\item S. Beigi, “Entanglement-assisted zero-error capacity is upper bounded by the Lov \'{a}sz theta function”,
+Phys. Rev. A 82:010303(R) (2010).
+\item W. Fulton, J. Harris, Representation Theory: A First Course, Springer Verlag, Berlin Heidelberg New
+York, 1991.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item   A. W. Harrow, Applications of Coherent Classical Communication and the Schur transform to quantum information theory, PhD thesis, MIT, 2005.
+\item M. Christandl, The Structure of Bipartite Quantum States — Insights from Group Theory and Cryptography,
+PhD thesis, University of Cambridge, 2006. arXiv:quant-ph/0604183.
+\item M. Hayashi, “Exponents of quantum fixed-length pure state source coding”, arXiv:quant-ph/0202002
+(2002).
+\item M.-D. Choi, “Completely Positive Linear Maps on Complex Matrices”, Lin. Alg. Appl. 10(3):285-290
+(1975).
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item R. Duan, Y. Feng, M. Ying, “Perfect distinguishability of quantum operations”, Phys. Rev. Lett.
+103:210501 (2009).
+\item M. Sion, “On General Minimax Theorems”, Pacific J. Math. 8(1):171-176 (1958).
+\item    P. Frankl, V. R\"{o}dl, “Forbidden Intersections”, Trans. Amer. Math. Soc. 300(1):259-286 (1987).
+\item A. Cabello, S. Severini, A. Winter, “(Non-)Contextuality of Physical Theories as an Axiom”,
+arXiv[quant-ph]:1010.2163 (2010).
+\item H.-K. Lo, “Classical-communication cost in distributed quantum-information processing: A generalization of quantum-communication complexity”, Phys. Rev. A 62:012313 (2000).
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item C. H. Bennett, D. P. DiVincenzo, P. W. Shor, J. A. Smolin, B. M. Terhal, W. K. Wootters, “Remote State
+Preparation”, Phys. Rev. Lett. 87:077902 (2001).
+\item C. H. Bennett, G. Brassard, C. Cr´epeau, R. Jozsa, A. Peres, W. K. Wootters, “Teleporting an Unknown Quantum State via Dual Classical and Einstein-Podolsky-Rosen Channels”, Phys. Rev. Lett.
+70(13):1895-1899 (1993).
+[42] P. Elias, “Zero Error Capacity Under List Decoding”, IEEE Trans. Inf. Theory 34(5):1070-1074 (1987).
+\item     C.-Y. Lai, R. Duan, “On the One-Shot Zero-Error Classical Capacity of Classical-Quantum Channels
+Assisted by Quantum Non-signalling Correlations”, arXiv[quant-ph]:1504.06046 (2015).
+
+\end{itemize}
+\end{frame}
+\end{document}

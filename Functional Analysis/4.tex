@@ -1,0 +1,163 @@
+%This is the template for taking note in class
+\documentclass{article}
+
+\usepackage[utf8]{inputenc} %general encoding package
+\usepackage[english]{babel} %general language-choosing typing package
+\usepackage{ctex} %中文
+\usepackage{amsmath} %general mathematics package
+\usepackage{dsfont} %double line font
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage[]{amssymb} %gives us the character \varnothing
+
+%Defining some useful theorem settings
+
+\newtheorem{Thm}{Theorem}[section]
+\newtheorem{Def}{Definition}[section]
+\newtheorem{Lemma}[Thm]{Lemma}
+\newtheorem{Eg}{Example}[section]
+\newtheorem{Coro}{Corollary}[Thm]
+\newtheorem{rmk}{Remark}[section]
+
+%Defining some mathematical symbols
+
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\CC}{\mathds{C}}
+\newcommand{\RR}{\mathds{R}}
+\newcommand{\QQ}{\mathds{Q}}
+\newcommand{\NN}{\mathds{N}}
+
+%Some basic information settings
+
+\title{Functional Analysis Lecture Notes}
+\author{JingDian Hsu 許靖典}
+\date\today
+
+%Document start
+
+\begin{document}
+\maketitle 
+\clearpage
+
+\section {Spectral Theorey of Compact Self Adjoint Operators}
+\qquad One of the fundamental results in linear algevra is the spectral theorem which states that if $\HH$ is a finite dimensional Hilbert space and  $A\in \LL(\HH)$ is self adjoint, then there exists and an orthonormal basis $\psi_1, \psi_2,\cdots, \psi_n$ for $\HH$ and real numbers $\lambda_1, \lambda_2, \cdots, \lambda_n$ such that 
+\[
+A\psi_i=\lambda_i \psi_i,\, 1\leq i\leq n
+\]
+The matrix $(a_{ij})=(\langle A\psi_j,\psi_i\rangle)$ corresponding to $A$ and $\psi_1, \psi_2, \cdots, \psi_n$ is the diagonal matrix
+\[
+\begin{bmatrix}
+	\lambda_1&\cdots&0\\
+	\vdots&\ddots&\vdots\\
+	0&\cdots&\lambda_n
+\end{bmatrix}
+\]
+\begin{rmk}
+	$||(\lambda I -K)^{-1}||=\sup {\{\frac{1}{(\lambda -\mu)}|\mu\, is\, eigenvalue \, of \, K \}}$
+\end{rmk}
+\begin{rmk}
+	If $dim \HH =\infty $ and  $K\in \LL(\HH)$ is compact then $K$ is not invertible (otherwise $I=KK^{-1}$)
+\end{rmk}
+
+\begin{Thm}
+	Let $K\in \LL(\HH)$ is compact and self-adjoint with a basic system of eigenvectors $\{\psi_k\}$ and eigenvalues $\lambda_k$. Given $y\in \HH$ the equation $Kx=y$ has a solution iff \\
+	(1) $y\perp ker(K)$ \\
+	(2) $\sum_{k}\frac{1}{\lambda_k^2}|\langle y, \psi_k \rangle|^2<\infty$\\
+	Moreover,
+	\[
+	x=u+\sum_k \frac{1}{\lambda_k}\langle y, \psi_k \rangle \, where \, u\in ker(K)
+	\]
+\end{Thm}
+\begin{proof}
+	Suppose (1) and (2) holds, let 
+	\[x_0 = \sum_k \frac {1}{\lambda_k}\langle y, \psi_k \rangle \psi_k \]
+	the summation converges by (2). We have the following,
+	\[Kx_o=\sum_k \frac {1}{\lambda_k}\langle y, \psi_k \rangle K\psi_k\]
+	\[=\sum_k \langle y, \psi_k \rangle \psi_k=y\]
+	Since $y\in ker(K)^{\perp}$ and by Theorem 6.1(a) $\{\psi_k\}$ is an orthonormal basis for $\overline{Im(K)}$. If $Kx=y$ then $u=x-x_0\in Ker(K)$ and $x=u+x_0$. Convertly, suppose $Kx=y$ Then $y\in Im(K)\subset (ker K)^\perp$ and 
+	\[\sum_k{\lambda_k\langle x, \psi_k \rangle \psi_k}=Kx=y=\sum_k{\langle x, \psi_k \rangle \psi_k} \]
+	So $\lambda_k \langle x, \psi_k \rangle \psi_k=\langle y, \psi_k \rangle $ and
+	\[\sum_k \frac{1}{\lambda_k^2}|\langle y, \psi_k \rangle|^2 = \sum_k |\langle x, \psi_k \rangle|^2\leq ||x||^2<\infty \]
+\end{proof}
+\begin{Thm}
+	Let $K\in \LL(\HH)$ be compact self-sdjoint with a basic system of eigenvectors $\{\psi_k \}$. Given $y\in \HH $ the equation $(\lambda_n -K)x=y$ has a solution iff $ y\in ker(\lambda_n - K)^\perp$. In this case, the general solution is 
+	\[x=\frac{1}{\lambda_n}[y+\sum_{\lambda_n\neq \lambda_k} \frac{\lambda_k}{\lambda_n-\lambda_k}\langle y, \psi_k \rangle \psi_k ]+z\]
+	where $z \in ker(\lambda_n-K)$.
+\end{Thm}
+\begin{proof}
+	Suppose $(\lambda_n-K)x=y$, then $y\in Im(\lambda_n-K)\subset ker(\lambda_n-K)^\perp $. Converely, suppose $y\in ker(\lambda_n-K)^\perp$. Let 
+	\[x_0 =\frac{1}{\lambda_n}[y+\sum_{\lambda_n\neq \lambda_k} \frac{\lambda_k}{\lambda_n-\lambda_k}\langle y, \psi_k \rangle \psi_k ]\]
+	converges since $\{\frac{\lambda_k}{\lambda_n-\lambda_k}\}$ is bounded. Then we have 
+	\[ (\lambda_n-K)x_0 =[y+\sum_{\lambda_n\neq \lambda_k} \frac{\lambda_k}{\lambda_n-\lambda_k}\langle y, \psi_k \rangle \psi_k ]-\frac{1}{\lambda_n}[\sum_{\lambda_n\neq \lambda_k} \lambda_k \langle y, \psi_k \rangle \psi_k \]\[+\sum_{\lambda_n\neq \lambda_k} \frac{\lambda_k^2}{\lambda_n-\lambda_k}\langle y, \psi_k \rangle \psi_k ] = y\] 
+	If also $(\lambda_n-K)x=y$, then $z=x-x_0\in ker(\lambda_n-K)$ and $x=x_0+z$.
+\end{proof}
+Next, we are going to introduce Min-Max properties of eigenvalues.
+\begin{Def}
+	An operator $A\in \LL(\HH)$ is nonnegative (or positive) and we write $A\geq 0$ if $\langle Ax, x \rangle\geq 0 \forall x\in \HH$ 
+\end{Def}
+\begin{rmk}
+	\[ A\geq 0 \Rightarrow A\, is\, self adjoint\]
+\end{rmk}
+\begin{Thm}
+	Let $A\in \LL(\HH)$ be compact self-adjoint. Then $A\geq 0$ iff the eigenvalues of $A$ are $\geq 0$.
+\end{Thm}
+\begin{proof}
+	Suppose $\{\psi_k, \lambda_k\}$ is a basic system of eigenvectors and eignenvalues of $A$. If $A\geq 0$, then $\lambda_k=\langle A\psi_k, \psi_k\rangle\geq 0 \forall k$. Conversely, if $\lambda_k \geq 0 \forall k$ then \[ \langle Ax,x \rangle = \langle \sum_k \lambda_k \langle x, \psi_k \rangle \psi_k , x\rangle = \sum_k \lambda_k |\langle x, \psi_k\rangle|^2 \geq 0 \forall x\in \HH\]
+\end{proof}
+\begin{Thm}
+	Let $A\in \LL(\HH)$ be compact and $A\geq 0 $. Then a basic system $\{\psi_n, \lambda_n\}$ of eigenvectors and eigenvalues of $A$ is given by
+	\[\lambda_1 = \max_{||x||=1}{\langle Ax,x \rangle} = \langle A \psi_1, \psi_1 \rangle \]
+	\[\lambda_2 = \max_{||x||=1, x\perp \psi_1}{\langle Ax,x \rangle} = \langle A \psi_2, \psi_2 \rangle\]
+	\[\vdots\]
+	\[\lambda_n = \max_{||x||=1, x\perp \{\psi_1, \psi_2, \cdots , \psi_{n-1}\}}{\langle Ax,x \rangle} = \langle A \psi_n, \psi_n \rangle\]
+\end{Thm}
+\begin{proof}
+	Recall (Coro 4.5): If $A$ compact self-adjoint, then $\max_{||x||=1}{|\langle Ax,x \rangle |}$ exists and equals $||A||$ \\
+	So if $A$ is compact and $A\geq 0$ then $||A||= \max_{||x||=1}{\langle Ax,x \rangle }$ by the proof of Theorem 5.1, 
+	\[\lambda_1=|\lambda_1| = ||A|| \]
+	\[\lambda_2=|\lambda_2| = ||A_2|| = ||A|_{\{\psi_1\}^\perp }||= \max_{||x||=1, x\perp \psi_1}{\langle Ax,x \rangle} \]
+	\[\vdots\]
+	\[\lambda_n=|\lambda_n| = ||A_n|| = ||A|_{\{\psi_1, \psi_2, \cdots \psi_{n-1} \}^\perp }||= \max_{||x||=1, x\perp \{\psi_1, \psi_2, \cdots , \psi_{n-1}\}}{\langle Ax,x \rangle} \]
+\end{proof}
+\begin{Thm}
+	Let $A\in \LL(\HH)$ be compact and $A\geq 0$ and let $\lambda_1 \geq \lambda_2\geq \cdots$ be the basic system of eigenvalues of $A$. Then 
+	\[\lambda_n = \min_{M, dim M = n-1} \max_{||x||=1, x \perp M} \langle Ax,x \rangle\]
+\end{Thm}
+\begin{proof}
+	For $n=1$ by Theorem above, $\lambda_1 = max_{||x||=1}\langle Ax,x\rangle$. Let $\{\psi_n\}$ be eigenvecotrs of $A$ corresponding to $\{\lambda_k\}$. If $dim M = n-1$, there exists $x_0\in span\{\psi_1,\cdots, \psi_m\} s.t. x_0\perp M$ and $||x_0||=1$. Suppose $x_0=\sum_{j=1}^{m}\alpha_j \psi_j$. Then $\sum_{j=1}^{m}|\alpha_j|^2 = ||x_0||^2 = 1$ and
+	\[\max_{||x||=1, x \perp M} \langle Ax,x \rangle \geq \langle Ax_0,x_0 \rangle =\langle \sum_{j=1}^{m}\alpha_j \lambda_j \psi_j,  \sum_{j=1}^{m}\alpha_j \psi_j \rangle \]
+	\[= \sum_{j=1}^{m} \lambda_j |\alpha_j|^2 \geq \lambda_n \sum_{j=1}^{m}|\alpha_j|^2 = \lambda_n = \max_{||x||=1 x\perp \{\psi_1, \cdots, \psi_{n-1}\}}\langle Ax,x\rangle \]
+	for all $dim M=n-1$. Hence 
+	\[\lambda_n \leq \min_{M, dim M = n-1} \max_{||x||=1, x \perp M} \langle Ax,x \rangle\]
+	Since $\{\psi_1, \cdots, \psi_{n-1}\}$ is a space of dimension $n-1$, hence
+	\[\lambda_n \geq \min_{M, dim M = n-1} \max_{||x||=1, x \perp M} \langle Ax,x \rangle\]
+\end{proof}
+\begin{Thm}
+	Let $A,B\in \LL(\HH)$ be compact with $A\geq 0, B\geq 0$. Let $\{\psi_1,\psi_2,\cdots \}$ and $\lambda_1(A)\geq\lambda_2(A)\geq\cdots$ be a basic system for $A$  and let $\{\phi_1,\phi_2,\cdots \}$ and $\lambda_1(B)\geq\lambda_2(B)\geq\cdots$ be a basic system for $B$, then\\
+	(a)If $\langle Ax,x \rangle \leq \langle Bx,x \rangle \forall x\in\HH $ i.e $A\leq B$ then $\lambda_n(A)\leq\lambda_n(B)\forall n$\\
+	(b)$|\lambda_n(A)-\lambda_n(B)|\leq ||A-B|| \forall n$\\
+	(c)$\lambda_n(A)+\lambda_m(B)=\lambda_{n+m-1}(A+B)$\\
+\end{Thm}
+\begin{proof}
+	(a)Follows from Min-Max theorem.\\
+	(b)For $||x||=1$ we have
+	\[|\langle Ax,x \rangle -\langle Bx,x\rangle |=|\langle (A-B)x,x\rangle|\leq ||A-B||\]
+	So we have
+	\[ \langle Ax,x\rangle \leq \langle Bx, x \rangle + ||A-B||\]
+	\[ \langle Bx,x\rangle \leq \langle Ax, x \rangle + ||B-A||\]
+	Apply Min-Max theorem, we have
+	\[\lambda_n(A)\leq\lambda_n(B)+||A-B||\]
+	\[\lambda_n(B)\leq\lambda_(A)+||A-B||\]
+	Hence (b) concluded.\\
+	(c) By theorem above, $\lambda_n(A)=max_{||x||=1, x\perp\{\psi_1,\cdots,\psi_{n-1}\}}\langle Ax,x\rangle$ \\and $\lambda_m(B)=max_{||x||=1 x\perp\{\phi_1,\cdots,\phi_{m-1}\}}\langle Bx,x\rangle$ Let $M=span\{\psi_1,\cdots,\psi_{n-1},\phi_1,\cdots,\phi_{m-1}\}$. Then $dim M= n+m-j$ for some $j\geq 2$ \\and $M^\perp=\{\psi_1,\cdots,\psi_{n-1}\}^\perp \cap \{\phi_1,\cdots,\phi_{m-1}\}^\perp$ \\So \[\lambda_n(A)+\lambda_m(B) \geq \max_{||x||=1,x\perp M}\langle Ax,x\rangle + \max_{||x||=1,x\perp M}\langle Bx,x\rangle= \lambda_{n+m-1}(A+B)\] 
+\end{proof}
+\begin{Coro}
+	Let $K_j\in \LL(H)$ be compact and $K_j\geq 0 \forall j$ If $||K_j-K_0||\rightarrow 0$ as $j\rightarrow \infty$ then $K_0$ is also compact and $K_0\geq 0$. Moreover $\forall n$
+	\[\lambda_n(K_j)\rightarrow \lambda_n(K_0)\]
+	as $j\rightarrow \infty$ 
+\end{Coro}
+\begin{proof}
+	By (b), $|\lambda_n(K_j)-\lambda_n(K_0)|\leq ||K_j-K_0||\rightarrow 0$
+\end{proof}
+\end{document}
+

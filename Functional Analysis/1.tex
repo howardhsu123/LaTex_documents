@@ -1,0 +1,313 @@
+\documentclass{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage[]{amsthm} %lets us use \begin{proof}
+\usepackage[]{amssymb} %gives us the character \varnothing
+
+\title{Functional Analysis Lecture Notes}
+\author{JingDian Hsu}
+\date\today
+%This information doesn't actually show up on your document unless you use the maketitle command below
+
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+\clearpage
+%Section and subsection automatically number unless you put the asterisk next to them.
+\section*{Chapter 1 Hilbert Space}
+\qquad In this chapter we review the main properties of the complex $n-$dimensional space $\Bbb{C}^n$ and then we study the Hilbert space which is its most natural infinite dimensional gerneralization. Many applications to classical problems are included (Least squares, Fourier series and others).
+%Basically, you type whatever text you want and use the $ sign to enter "math mode".
+%For fancy calligraphy letters, use \mathcal{}
+%Special characters are their own commands
+
+\subsection*{Definition 1}
+Let $E$ be a vector space over $\Bbb{C}$. An inner product on $E$ is a function $\langle ,\rangle:E\times E \rightarrow \Bbb{C}$ such that \\
+(a) $\langle x+y, z\rangle = \langle x, z\rangle +\langle y, z\rangle$\\
+(b) $\langle\alpha x, y\rangle=\alpha\langle x,y\rangle$\\
+(c) $\overline{\langle x,y\rangle}=\langle y,x\rangle$\\
+(d) $\langle x,y\rangle\leq 0$ and $\langle x,x \rangle >0$ if $x\neq0$ \\
+$(E, \langle, \rangle)$ is called an inner product space.
+
+\subsection*{Definition 2}
+We define norm as 
+\[
+|| x || = \sqrt{\langle x,x \rangle} 
+\]
+and we define distance as
+\[
+d(x,y)=||x-y||
+\]
+
+\subsection*{Example 3}
+(1) $\Bbb{C}^n$ with inner product $\langle x, y \rangle = \sum_{i=1}^{n} x_i \overline{y_i}$.\\
+(2) $l^2 =  \{(x_1, x_2, ...)| x_i\in \Bbb{C}, \sum_{i=1}^{\infty}| x_i |^2 < \infty \}$ with inner product $\langle x,y \rangle = \sum_{i=1}^{\infty} x_i \overline{y_i}$\\
+(3) $L^2[a,b] = \{f| f:[a,b] \rightarrow \Bbb{C} \, Lebesque \, measure \, s.t. \int_{a}^{b} |f(x)|^2 dx< \infty \}$ with inner product $\langle f,g \rangle =\int_{a}^{b} f(x) \overline{g(x)} dx$\\
+(4) $C[a,b] = \{f|f:[a,b]\rightarrow \Bbb{C} \, continuous\} $ with inner product $\langle f,g \rangle = \int_{a}^{b} f(x) \overline{g(x)} dx$\\
+
+\subsection*{Theorem 4}
+(i) Schwarz inequality
+\[
+|\langle x,y\rangle| \leq ||x|| + ||y|| 
+\]
+(ii) Trangular inequality
+\[ 
+||x+y|| \leq ||x|| + ||y||
+\] 
+(ii) Parallelegrum law
+\[
+||x+y||^2+||x-y||^2=2(||x||^2+||y||^2)
+\]
+%
+\begin{proof}
+Trivial.
+\end{proof}
+
+\subsection*{ Definition 4}
+$E$ is  complete if every Cauchy sequence in $E$ converges to a vector in $E$. A complete inner product space is callled a Hilbert space.
+
+\subsection*{ Example 5}
+(1) $\Bbb{C}^n$ is an n-dimensional Hilbert space. Every finite dimensional inner product space is complete.\\
+(2) $l^2$ is an infinite dimensional Hilbert space.
+\begin{proof}
+Let $\{x_n\}$ be a Cauchy sequence in $l^2$, where
+\[
+x_n=(\xi_{1}^{(n)}, \xi_{2}^{(n)}, ...)
+\]
+For $k$ fixed, we have 
+\[
+|\xi_{k}^{(n)}-\xi_{k}^{(m)}| \leq || x_n-x_m|| \rightarrow 0\, as \, n,m \rightarrow \infty
+\]
+So for fixed $k$, $\{\xi_{k}^{(n)}\}_{n=1}^{\infty}$ is a Cauchy sequence in $\Bbb{C}$. Since $\Bbb{C}$ is complete, there exsists $\xi_k\in \Bbb{C}$ such that $\xi_{k}^{n}\rightarrow\xi_{k}$ as $n\rightarrow\infty$.
+Given $j\in \Bbb{N}$, since
+\[
+\sum_{k=1}^{j}|\xi_{k}^{(n)}|^2 \leq\sum_{k=1}^{\infty}|\xi_{k}^{(n)}|^2  = ||x_n||^2 \leq M
+\]
+Take $n \to \infty$, we have
+\[
+\sum_{k=1}^{j} |\xi_{k}|^2 \leq M
+\]
+For any fixed $j$. Hence, 
+\[
+\sum_{k=1}^{\infty}|\xi_k|^2\leq M
+\]
+Therefore, $x \in l^2$. One only has to show that $x_n \to x$ as $n \to \infty$. Given $\epsilon > 0$ , there exsists $N>0$ such that if $n,m>N$ and $j\in \Bbb{N}$, then 
+\[
+\sum{k=1}^{j}|\xi_k^(n)-\xi_k^(m)|^2 \leq ||x_n-x_m|| <\epsilon
+\]
+Letting $m \rightarrow \infty$,
+\[
+\sum_{k=1}^{j}|\xi_k^(n)-\xi_k|\leq\epsilon
+\]
+Letting $j \rightarrow \infty$ we have
+\[
+||x_n-x||\leq\epsilon
+\]
+whenever $n>N$
+
+\end{proof}
+
+(3) $L[a,b]$ is an infinite dimension Hilbert space.\\
+
+\subsection*{Example 6}
+(1) Let $l_D=\{(\xi_1, \xi_2, ...) \in l^2 | \xi_k=0\, for\, all\,but\, at\, most\, finite\, number\, of\, k\}$. Then $l_D$ is not complete.
+\begin{proof}
+Take $x_n= (1/2, 1/2^2, ..., 1/2^n, 0, 0,...)$ a Cauchy sequence which converge to $x=(1/2,1/2^2,...)$ but $x\notin l_D$\\
+\end{proof}
+(2) The inner product space $P$ of all polynomials with
+\[
+\langle f,g \rangle = \int_{0}^{1}f(x)\overline{g(x)}dx
+\]
+is not complete.
+\begin{proof}
+Take $P_n(x)=\sum_{j=0}^{n}\frac{1}{2^j}x^j$, by Lebesque Dominant Convergent Theorem, we have
+\[
+P_n(x)\rightarrow \frac{1}{1-\frac{x}{2}} \in L^2[0,1]
+\]
+So $\{P_n\}$ is Cauchy in $P$ which doesn't converge.
+\end{proof}
+
+\subsection*{Definition 7}
+The distance from a point $x\in E$ to a set $S\subseteq E$ is defined by
+\[
+d(x,S)\equiv \inf_{y\in S} || x-y||
+\]
+
+\subsection*{Theorem 8}
+This is Theorem 4.2 in text book.\\
+Let M be a finite dimension subspace of $E$ and let $\{\psi_1, \psi_2, ...\psi_n\}$ be an orthonormal basis for $M$. For each $x\in E$, the vecor $y=\sum_{j=1}^{n}\langle x,y_j \rangle \psi_j$ is the unique vector in $M$ such that $||x-y||=d(x,M)$.
+\begin{proof}
+We first prove $x-y\bot M$. If $z\in M$, say $z=\sum_{j=1}^{n}\alpha_j\psi_j$ then 
+\[
+\langle x-y,z \rangle = \sum_{j=1}^{n}\overline{\alpha_j}\langle x-y, \psi_j \rangle=\sum_{j=1}^{n}\overline{\alpha_j}(\langle x, \psi_j \rangle-\langle y, \psi_j \rangle) = 0
+\]
+For any $w\in M$, $w\neq y$, we have 
+\[
+||x-w|| = ||x-y||^2+||y-w||^2 \geq ||x-y||^2
+\]
+\end{proof}
+
+\subsection*{Theorem 9}
+This is Theorem 4.3 in text book.\\
+Let $M$ be a subspace of $E$, $x\in E$ and $y\in M$. Then $x-y\bot M$ iff $||x-y||=d(x,M)$.
+\begin{proof}
+$(\Rightarrow)$ by theorem 8.\\
+$(\Leftarrow)$ Supppose $||x-y||=d(x,M)$. Since $M$ is a subspace $y+\alpha z \in M \forall \alpha \in \Bbb{C}, z\in M$.
+\[
+||x-y||^2 \leq||x-(y+\alpha z)||^2=||x-y||^2-2Re(\alpha \langle z, x-y \rangle)+|\alpha|^2 ||z||^2
+\]
+Thus, $2Re(\alpha\langle z, x-y\rangle)\leq |\alpha|^2||z||^2$.\\
+Take $\alpha=\epsilon\overline{\langle z, x-y \rangle}$ where $\epsilon >0$. We have
+\[
+2\epsilon|\langle z, x-y \rangle|^2 \leq \epsilon^2 | \langle z, x-y\rangle | ||z||^2
+\]
+Since $\epsilon$ is arbitrary, we have $\langle z, x-y\rangle = 0$.
+\end{proof}
+\subsection*{Definition 10}
+\[
+g(x_1,x_2,...,x_n)=det(
+\begin{bmatrix}
+\langle x_1, x_1 \rangle & \langle x_2, x_1 \rangle & \dots & \langle x_n, x_1 \rangle \\
+\langle x_1, x_2 \rangle & \langle x_2, x_2 \rangle & \dots & \langle x_n, x_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\langle x_1, x_n \rangle & \langle x_2, x_n \rangle & \dots & \langle x_n, x_n \rangle 
+\end{bmatrix}
+)
+\]
+is called The Gram determinant.
+
+\subsection*{Theorem 11}
+This is Theorem 5.1 in text book.\\
+Let $\{y_1, y_2, ... y_n\}$ be a basis (not necessarily orthogonal) for subspace $M$ of $E$. Then for any $y \in E$ 
+\[
+d(y,M)=(\frac{g(y_1, y_2,... ,y_n, y)}{g(y_1,y_2,...y_n)})^{\frac{1}{2}} \eqno{(1)}
+\]
+and $0<g(y_1, y_2, ... ,y_n)\leq ||y_1||^2||y_2||^2...||y_n||^2$. Moreover, the vector $w\in M$ for which $d(y,M)=||y-w||$ is given by
+\[
+w=\frac{-1}{g(y_1, y_2, ...,y_n)}det(
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle & \langle y, y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle & \langle y, y_2 \rangle\\
+\vdots & \vdots & \ddots & \vdots & \vdots  \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle & \langle y, y_n \rangle\\
+y_1 & y_2 & \dots & y_n & 0 \\
+\end{bmatrix}
+)
+\eqno{(2)}
+\]
+\begin{proof}
+By theorem 8, theorem 9, there exsists vector $w=\sum_{j=1}^{n}\alpha_j y_j \in M$ such that $||y-w||=d(y,M)$ or equivalently $y-w\bot M$. 
+\[
+0=\langle y-w,y_k \rangle=\langle y, y_k \rangle-\sum_{j=1}^{n}\alpha_j\langle y_j,y_k\rangle \quad \forall 1\leq k\leq n.
+\]
+i.e. 
+
+\[
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle 
+\end{bmatrix}
+\,
+\begin{bmatrix}
+\alpha_1\\
+\alpha_2\\
+\vdots \\
+\alpha_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+\langle y, y_1 \rangle\\
+\langle y, y_2 \rangle\\
+\vdots \\
+\langle y, y_n \rangle
+\end{bmatrix}
+\eqno{(3)}
+\]
+Since (3) has  a unique solution , the determinant of the system is not zero. By Cramer's Rule, we have
+\[
+\alpha_j=\frac{D_j}{g(y_1,y_2,...,y_n} 
+\]
+where $D_j$ is the determinant of the matrix obtained by replacing $j$th column of the matrix 
+\[
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle 
+\end{bmatrix}
+\]
+by the column
+\[
+\begin{bmatrix}
+\langle y, y_1 \rangle\\
+\langle y, y_2 \rangle\\
+\vdots \\
+\langle y, y_n \rangle
+\end{bmatrix}
+\]
+Thus $w$ is the satisfies the equation (2).\\
+To prove (1), write $d=d(y.M)$ for short. Since $y-w\bot M$, $ d^2 =||y-w||^2=\langle y-w, y-w \rangle=\langle y-w,y\rangle=\langle y,y \rangle-\sum\alpha_j\langle y_j,y \rangle$.\\
+This together with (3) shows that the system of equation
+\[
+\begin{bmatrix}
+\langle y_1, y_1 \rangle & \langle y_2, y_1 \rangle & \dots & \langle y_n, y_1 \rangle & \langle -y,y_1 \rangle \\
+\langle y_1, y_2 \rangle & \langle y_2, y_2 \rangle & \dots & \langle y_n, y_2 \rangle & \langle -y,y_2 \rangle \\
+\vdots & \vdots & \ddots & \vdots &\vdots \\
+\langle y_1, y_n \rangle & \langle y_2, y_n \rangle & \dots & \langle y_n, y_n \rangle & \langle -y,y_n \rangle\\ 
+\langle y_1, y \rangle & \langle y_2, y \rangle & \dots & \langle y_n, y \rangle & d^2 - \langle y,y \rangle
+\end{bmatrix}
+\,
+\begin{bmatrix}
+x_1\\
+x_2\\
+\vdots \\
+x_n\\
+x_{n+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+0\\
+\vdots \\
+0\\
+0
+\end{bmatrix}
+\]
+has a nontrivial solution $(x_1, x_2, ..., x_{n+1})=(\alpha_1, \alpha_2,...,\alpha_n, 1)$, which implies the matrix has zero determinant. Expand the determinant through last column we have:
+\[
+g(y_1,y_2,...,y_n,y)=d^2(y,M)g(y_1,y_2,...,y_n)\eqno{(4)}
+\]
+
+Now, $g(y_1)=\langle y_1, y_1 \rangle>0$. Applying (4), to $M_k=span\{y_1,y_2,...,y_k\}$ and $y=y_k+1$ we get
+\[
+g(y_1,y_2,...,y_k,y_k+1)=d^2(y_{k+1},M_k)g(y_1,y_2,...,y_k)\leq||y_{k+1}||^2g(y_1,y_2,...,y_k)
+\]
+By Induction Hypothesis, the statement holds.
+
+\end{proof}
+
+\subsection*{Example 12}
+Let $\{y_1,y_2,y_3\}$ be linearly independent in $\Bbb{R}^3$. The volume of the parallelopiped is
+\[
+V=||y_1||d(y_2,span\{y_1\})d(y_3, span\{y_1,y_2\})
+\]
+By theorem 11, 
+\[
+V^2=\langle y_1,y_1 \rangle \frac{g(y_1,y_2)}{g(y_1)} \frac{g(y_1,y_2,y_3)}{g(y_1,y_2)}=g(y_1,y_2,y_3)
+\]
+
+\subsection*{Theorem 13}
+It is called Hadamard's Inequality.\\
+If $A=(a_{ij})$ is a complex $n\times n$ matrix, then 
+\[
+|det(A)|^2\leq\prod_{i=1}^{n}\sum_{j=1}^{n}|a_{ij}|^2
+\]
+\begin{proof}
+If $det(A)=0$ trivial. Suppose $det(A)\neq 0 $. Let $y_i = (a_{i1},a_{i2},...,a_{in})$. Then $\{y_1,y_2,...,y_n\}$ is linearly independent and $\langle y_i, y_j \rangle = \sum_{k=1}^{n} a_{ik}\overline{a_{jk}}$. By theorem 11, we have the inequality holds.
+\end{proof}
+\end{document}

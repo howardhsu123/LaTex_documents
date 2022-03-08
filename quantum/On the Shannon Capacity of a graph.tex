@@ -1,0 +1,304 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+%------------------------------------------------------------
+%This block of code defines the information to appear in the
+%Title page
+\title[SC of a graph] %optional
+{On the Shannon Capacity of a Graph}
+
+\subtitle{}
+
+\author[Lov\'{a}sz] % (optional)
+{L\'{a}szl\'{o} Lov\'{a}sz}
+
+\institute[] % (optional)
+{
+}
+
+\date[IEEE 1979] % (optional)
+{IEEE Transactions on Information Theorey, January 1979}
+
+%\logo{\includegraphics[height=1cm]{overleaf-logo}}
+
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+
+  \end{frame}
+}
+%------------------------------------------------------------
+
+
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+
+
+%---------------------------------------------------------
+%This block of code is for the table of contents after
+%the title page
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+
+\end{frame}
+%---------------------------------------------------------
+
+
+\section{Introduciton}
+
+%---------------------------------------------------------
+%Changing visivility of the text
+\begin{frame}
+\frametitle{Shannon Capacity of a graph}
+
+
+
+\begin{itemize}
+    \item Consider a graph, whose vertices are letters in an alphabet and in which adjacency means that the letters can be confused. The the maximum number of one-letter messages which can be sent without danger of confusion is the maximum number of independent points in the graph. Denote $\alpha (G)$.
+    \item Denote by $\alpha (G^{k})$ the maximum of number of $k$-letter messages which can be sent without danger of confusion.
+    \item $\alpha (G^{k}) \geq \alpha (G)^{k}$ .
+    \item Define 
+\[
+\Theta (G) = \sup_{k}\sqrt[k]{\alpha (G^{k})}=\lim_{k \rightarrow \infty}\sqrt[k]{\alpha (G^{k})}
+\] 
+is called Shannon Capacity of the graph $G$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Orthonormal representation}
+
+\begin{itemize}
+\item An orthonormal representation of $G$ is a system $(v_1, v_2,..., v_n)$ of unit vectors in a Euclidean space such that if $i$ and $j$ are nonadjacent vertices, then  $v_i$, $v_j$ are orthogonal.
+\item Define $value$ of an orthonormal representation $(u_1, u_2,...,u_n)$ to be
+\[
+\min_{c} \max_{1\leq i \leq n} \frac{1}{(c^{T}u_i)^2}
+\]
+where $c$ ranges over all unit vectors. The vector $c$ yielding the minimum is called the $handle$ of the representation.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lov\'{a}sz Theta function}
+\begin{itemize}
+\item $\vartheta (G)$ denote the minimum value over all representations of $G$. 
+\item A representation is optimal if it achieves this minimum value.
+\begin{block}{Lemma1}
+\[
+\vartheta (G \cdot H) \leq \vartheta (G) \vartheta (H)
+\]
+\end{block}
+\begin{block}{Lemma2}
+\[
+\alpha (G) \leq \vartheta (G) 
+\]
+\end{block}
+
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+
+\section{The capacity of the pentagon}
+
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Lov\'{a}sz Theta is upper bound of Shannon Capacity}
+
+\begin{alertblock}{Theorem 1}
+\[
+\Theta (G) \leq \vartheta (G)
+\]
+\end{alertblock}
+
+Proof: By Lemma1,2, we have
+\[
+\alpha (G^k) \leq \vartheta (G^k) \leq \vartheta (G)^k
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{$\Theta (C_5)$}
+
+\begin{block}{Theorem 2}
+\[
+\Theta (C_5) = \sqrt(5)
+\]
+\end{block}
+
+Proof: Choose precise orthonormal representation $\{u_i\}$ and handle $c$ such that 
+\[
+\max_{i} \frac{1}{(c^T u_i)^2}=\sqrt{5}
+\]
+Hence,
+\[
+\Theta (C_5) \leq \vartheta(C_5) \leq \sqrt{5}
+\]
+And the opposite inequality is known. Therefore the theorem follows.
+
+\end{frame}
+%---------------------------------------------------------
+
+\section{Formulas For $\vartheta (G)$}
+
+%---------------------------------------------------------
+
+\begin{frame}
+\frametitle{To compute $\vartheta (G)$}
+
+\begin{block}{Theorem 3}
+Let $G$ be a graph on vertices $\{1,2,\cdots ,n\}$. Then $\vartheta (G)$ is the minimum of the largest eigenvalue of any symmetic matrix $(a_ij)^{n}_{i,j=1}$ such that 
+\begin{equation}
+a_{ij}=1,\,if\, i=j\, or\, if\, i\, and\, j\, are\, nonadjacent.
+\end{equation}
+\end{block}
+
+Proof: 
+Let $(u_1,u_2,...u_n)$ be an optimal orthonormal representation of $G$ with handle $c$. Define
+\[
+a_{ij}=1-\frac{u_i^T u_j}{(c^T u_i) (c^T u_j)},\, i\neq j
+\]
+\[
+a_{ii}=1
+\]
+and 
+\[
+A=(a_{ij})_{i,j=1}^{n}
+\]
+We can get $\vartheta (G) I-A$ is positive semidefinite, and hence the largest eigenvalue of $A$ is at most $\vartheta (G)$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{To compute $\vartheta (G)$}
+Conversely, let $A=(a_{ij})$ be any matrix satisfying the condition (1), and let $\lambda$ be its largest eigenvalue. Then $\lambda I-A$ is positive semidefinite, and hence there exsist vectors
+\[
+\lambda\delta_{ij}-a_{ij}=x_i^T x_j
+\]
+Let $c$ be a unit vector perpendicular to $x_1, x_2, \cdots, x_n$ and set 
+\[
+u_i=\frac{1}{\sqrt{\lambda}} (c+x_i)
+\]
+So $(u_1,u_2,\cdots,u_n)$ is an orthonormal representation of $G$. Moreover, 
+\[
+\frac{1}{(c^T u_i)^2}=\lambda \, for\, i=1,2,\cdots,n
+\]
+Therefore, $\vartheta (G)\leq \lambda$. The proof complete.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{To compute $\vartheta (G)$}
+
+\begin{block}{Theorem 4}
+Let $G$ be a graph on the set of vertices $\{1,2,\cdots ,n\}$, and let $B=(b_{ij})^{n}_{i,j=1}$ range over all positive semidefinite symmetric matrices such that 
+\begin{equation}
+b_{ij}=0
+\end{equation}
+for every pair $(i,j)$ of distinct adjacent vertices and 
+\begin{equation}
+Tr(B)=1
+\end{equation}
+Then 
+\[ 
+\vartheta (G) = \max_{B} Tr (BJ)
+\]
+
+Note that $Tr (BJ)$ is the sum of the entries in $B$.
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{To compute $\vartheta (G)$}
+Proof: Let $A=(a_{ij})_{i,j=1}^n$ be a matrix satisfying condition (1) with largest eigenvalue $\vartheta (G)$, and let $B$ be any symmetric matrix satisfying (2),(3). Then,
+\[
+Tr (BJ)=\sum_{i=1}^{n}\sum_{j=1}^{n}b_{ij}=\sum_{i=1}^{n}\sum_{j=1}^{n}{a_{ij}b_{ij}}= Tr (AB)
+\]
+and so 
+\[
+\vartheta (G) -Tr(BJ) = Tr(\vartheta (G)I-A)B
+\]
+Since $\vartheta (G) I-A$ and $B$ are positive semidefinite, hence
+\[
+Tr(\vartheta (G)I-A)B \geq 0
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{To compute $\vartheta (G)$}
+We have to construct a matrix $B$ which satisfies the previous inequality with equality. Let $(i_1,j_1),\cdots,(i_m,j_m)(i_k < j_k)$ be the edges of $G$. Consider
+\[
+\hat{h}=(h_{i_1}h_{j_1},\cdots,h_{i_m}h_{j_m},(\sum{h_i})^2)^T
+\]
+where $h=(h_1,\cdots, h_n)$ ranges through all unit vectors and 
+\[
+z=(0,0,\cdots,0,\vartheta (G))^T
+\]
+$z$ is the convex hull of the vectors $\hat{h}$.
+There exist a finite number of unit vectors $\hat{h_1}, \hat{h_2}, \cdots, \hat{h_N}$ and nonnegative reals $\alpha_1, \alpha_2, \cdots, \alpha_N$ such that
+\[
+\alpha_1+\cdots+\alpha_N=1
+\]
+\[
+\alpha_1 \hat{h_1}+\cdots+\alpha_N \hat{h_N}=z
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{To compute $\vartheta (G)$}
+Set 
+\[
+h_p=(h_{p,1},\cdots,h_{p,n})^T
+\]
+\[
+b_{ij}=\sum_{p=1}^{N}\alpha_p h_{pi} h_{pj}
+\]
+\[
+B=(b_{ij})
+\]
+The matrix $B$ satisfies the condition and
+\[
+Tr(BJ)=\vartheta (G)
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{References}
+
+\begin{itemize}
+\item C.Berge, Graphs and Hypergraphs. Amsterdam and London North-Holland; New York: American Elsevier, 1973.
+\item P.Erd\"os, C.Ko, and R. Rado, "Intersection theorems for systems of finite sets, " Quart.J. Math .Oxford, vol.12, pp. 313-320, 1961
+\item A.J. Hoffman, "On eigenvalues and colorings of graphs," in B. Harris, Ed., Graph Theory and its Applications. New York and London: Academic, 1970, pp. 79-91.
+\item P. Lancaster, Theory of Matrices. New York and London: Academic, 1969.
+\item M. Rosenfeld, "On a problem of Shannon," Proc, Amer, Math. Soc., vol 18, pp. 315-319, 1967.
+\item C.E. Shannon, "The zero-error capacity of a noisy channel, " IRE Trans. Inform, Thoery, vol. IT-2, no.3 pp. 8-19, Sept. 1956.
+\end{itemize}
+
+
+\end{frame}
+
+\end{document}
